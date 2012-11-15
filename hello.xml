@@ -1,0 +1,27 @@
+<!-- gadget.xml -->
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module specificationVersion="2.0">
+  <ModulePrefs title="hello world example" /> 
+  <Content type="html"><![CDATA[ 
+    <script type="text/javascript">
+    /*
+     *  Function which gets called whenever the embedded experience context of this gadget changes.
+     */
+    function myCallback(context){
+      document.getElementById("contextData").innerHTML = "Context Information For This Gadget: " + context;
+    } 
+   
+    function initData() {
+      /*
+       *  Register a listener to know that the value associated with the key org.opensocial.ee.context has changed.
+       */
+      opensocial.data.getDataContext().registerListener('org.opensocial.ee.context', function(key){
+        myCallback(opensocial.data.getDataContext().getDataSet(key));
+      });
+    } 
+    gadgets.util.registerOnLoadHandler(initData);
+    </script>
+    Hello World! 
+    <div id="contextData"></div>
+  ]]></Content> 
+</Module>
